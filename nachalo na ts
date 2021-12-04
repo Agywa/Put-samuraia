@@ -1,0 +1,57 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+    
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+
+import './App.css';
+import Header from './Header';
+import Technologies from "./Technologies";
+
+
+const App = () => {
+  return (
+      <div>
+        <Header />
+        <Technologies />
+      </div>
+  );
+};
+
+
+export default App;
+
+
+let Header = () => {
+  return (<div>
+    <a href ='#s'>Home</a>
+    <a href ='#s'>News feed</a>
+    <a href ='#s'>Messages</a>
+  </div>);
+};
+export default Header
+
+
+
+let Technologies = () => {
+    return (
+        <div>
+            <ul>
+                <li> css</li>
+                <li> html</li>
+                <li> js</li>
+                <li> react</li>
+
+            </ul>
+        </div>);
+};
+export default Technologies

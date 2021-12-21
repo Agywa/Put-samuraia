@@ -1,9 +1,11 @@
 .header {
     grid-area: h;
-    background-color: rebeccapurple;
+    background-image: url(https://www.gastronom.ru/binfiles/images/20141007/be915b09.jpg);
+    background-size: 100%;
 }
 
-.header img {
+.heasder img {
     width: 50px;
+
 }
 

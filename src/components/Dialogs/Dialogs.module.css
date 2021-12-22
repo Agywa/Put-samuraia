@@ -19,3 +19,8 @@ padding: 10px;
 .messages .message {
     color: white;
 }
+.itemImg {
+    width: 1px;
+    height: 1px;
+    border-radius: 1px;
+}

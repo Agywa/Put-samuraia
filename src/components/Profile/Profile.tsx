@@ -1,6 +1,7 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {addPost} from "../../redux/state";
 
 
 const Profile = (props: any) => {
@@ -10,7 +11,10 @@ const Profile = (props: any) => {
         <div>
 
             <ProfileInfo/>
-            <MyPosts posts={props.state.posts} />
+            <MyPosts
+                posts={props.state.posts}
+                addPost={props.addPost}
+            />
         </div>
 
     )

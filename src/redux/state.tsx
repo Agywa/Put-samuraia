@@ -10,6 +10,8 @@ let state = {
         ],
 
     },
+
+
     dialogsPage: {
         messages: [
             {id: 1, message: "Hi"},
@@ -30,6 +32,16 @@ let state = {
     },
 }
 
+export let addPost = (postMessage: any) => {
+
+    let newPost = {
+        id: 5,
+        message: postMessage,
+        likesCount: 0
+    };
+
+    state.profilePage.posts.push(newPost)
+}
 
 
 export default state;

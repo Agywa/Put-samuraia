@@ -1,4 +1,6 @@
 import React from 'react';
+import {rerenderEntireTree} from "../render";
+
 
 let state = {
     profilePage: {
@@ -33,15 +35,24 @@ let state = {
 }
 
 export let addPost = (postMessage: any) => {
-
     let newPost = {
         id: 5,
         message: postMessage,
         likesCount: 0
     };
 
-    state.profilePage.posts.push(newPost)
+    state.profilePage.posts.push(newPost);
+
+    rerenderEntireTree({state});
 }
 
+export let addDialogs = (name:any) => {
+    let addDialogs = {
+        id: 7,
+        name: name
+    };
+    state.dialogsPage.dialogs.push(addDialogs)
+    rerenderEntireTree({state})
+}
 
 export default state;

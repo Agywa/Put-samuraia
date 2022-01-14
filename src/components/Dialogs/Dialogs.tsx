@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
+import {addDialogs, addPost} from "../../redux/state";
 
 
 const Dialogs = (props: any) => {
@@ -13,8 +14,9 @@ const Dialogs = (props: any) => {
     let newMessageElement = React.createRef<any>()
 
     let addMessage = () => {
-        let text = newMessageElement.current.value
-        alert(text)
+        let text = newMessageElement.current.value;
+        addDialogs(text);
+        newMessageElement.current.value = "";
     }
 
     return (

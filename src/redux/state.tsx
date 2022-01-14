@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {KeyboardEvent} from 'react';
 import {rerenderEntireTree} from "../render";
 
 
@@ -10,6 +10,7 @@ let state = {
             {id: 3, message: "Bla Bla", likesCount: 11},
             {id: 4, message: "Dada", likesCount: 11},
         ],
+        newPostText: "it_kamasutra.com"
 
     },
 
@@ -34,19 +35,26 @@ let state = {
     },
 }
 
-export let addPost = (postMessage: any) => {
+
+export let addPost = () => {
     let newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0
     };
 
     state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText =""
 
     rerenderEntireTree({state});
 }
 
-export let addDialogs = (name:any) => {
+export let updateNewPostText = (newText: any) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree({state});
+}
+
+export let addDialogs = (name: any) => {
     let addDialogs = {
         id: 7,
         name: name

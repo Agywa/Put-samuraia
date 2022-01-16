@@ -43,48 +43,21 @@ let store = {
     subscribe(observer: any) {
         this._callSubscriber = observer;
     },
-    //
-    // addPost() {
-    //     let newPost = {
-    //         id: 5,
-    //         message: this._state.profilePage.newPostText,
-    //         likesCount: 0
-    //     };
-    //
-    //     this._state.profilePage.posts.push(newPost);
-    //     this._state.profilePage.newPostText = ""
-    //
-    //     this._callSubscriber();
-    // },
-    // updateNewPostText(newText: any) {
-    //     this._state.profilePage.newPostText = newText;
-    //     this._callSubscriber();
-    // },
-    //
-    // addDialogs(name: any) {
-    //     let addDialogs = {
-    //         id: 7,
-    //         name: name
-    //     };
-    //     this._state.dialogsPage.dialogs.push(addDialogs)
-    //     this._callSubscriber()
-    // },
 
 
-    dispatch (action: any) { //{type: "ADD-POST"}
+    dispatch(action: any) { //{type: "ADD-POST"}
         if (action.type === "ADD-POST") {
             let newPost = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
                 likesCount: 0
             };
-
+            debugger;
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = ""
 
             this._callSubscriber();
-        }
-        else if (action.type === "UPDATE-NEW-POST-TEXT") {
+        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber();
         }
@@ -96,3 +69,29 @@ let store = {
 export default store;
 
 
+//
+// addPost() {
+//     let newPost = {
+//         id: 5,
+//         message: this._state.profilePage.newPostText,
+//         likesCount: 0
+//     };
+//
+//     this._state.profilePage.posts.push(newPost);
+//     this._state.profilePage.newPostText = ""
+//
+//     this._callSubscriber();
+// },
+// updateNewPostText(newText: any) {
+//     this._state.profilePage.newPostText = newText;
+//     this._callSubscriber();
+// },
+//
+// addDialogs(name: any) {
+//     let addDialogs = {
+//         id: 7,
+//         name: name
+//     };
+//     this._state.dialogsPage.dialogs.push(addDialogs)
+//     this._callSubscriber()
+// },

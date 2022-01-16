@@ -18,7 +18,8 @@ const MyPosts = (props: any) => {
     let onPostChange = () => {
         let text = newPostElement.current.value;
         // props.updateNewPostText(text);
-        props.dispatch({type : "UPDATE-NEW-POST-TEXT", newText: text} )
+        let action = {type: "UPDATE-NEW-POST-TEXT", newText: text};
+        props.dispatch(action)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {

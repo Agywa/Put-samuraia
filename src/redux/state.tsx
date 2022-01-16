@@ -33,13 +33,12 @@ let store = {
             ],
         },
     },
+    _callSubscriber() {
+        console.log("state changed");
+    },
 
     getState() {
         return this._state
-    },
-
-    _rerenderEntireTree() {
-        console.log("state changed");
     },
 
     addPost() {
@@ -52,12 +51,12 @@ let store = {
         this._state.profilePage.posts.push(newPost);
         this._state.profilePage.newPostText = ""
 
-        this._rerenderEntireTree();
+        this._callSubscriber();
     },
 
     updateNewPostText(newText: any) {
         this._state.profilePage.newPostText = newText;
-        this._rerenderEntireTree();
+        this._callSubscriber();
     },
 
     addDialogs(name: any) {
@@ -66,10 +65,12 @@ let store = {
             name: name
         };
         this._state.dialogsPage.dialogs.push(addDialogs)
-        this._rerenderEntireTree()
-    }, subscribe(observer: any) {
-        this._rerenderEntireTree = observer;
-    }
+        this._callSubscriber()
+    },
+
+    subscribe(observer: any) {
+        this._callSubscriber = observer;
+    },
 }
 
 export default store;

@@ -67,8 +67,7 @@ let store = {
         };
         this._state.dialogsPage.dialogs.push(addDialogs)
         this._rerenderEntireTree()
-    },
-    subscribe(observer: any) {
+    },subscribe(observer: any) {
         this._rerenderEntireTree = observer;
     }
 }

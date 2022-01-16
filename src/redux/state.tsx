@@ -1,5 +1,8 @@
-import React, {KeyboardEvent} from 'react';
-import {rerenderEntireTree} from "../render";
+import React from 'react';
+
+let rerenderEntireTree = (props: any) => {
+    console.log("state changed");
+}
 
 
 let state = {
@@ -36,7 +39,7 @@ let state = {
 }
 
 
-export let addPost = () => {
+export const addPost = () => {
     let newPost = {
         id: 5,
         message: state.profilePage.newPostText,
@@ -44,17 +47,17 @@ export let addPost = () => {
     };
 
     state.profilePage.posts.push(newPost);
-    state.profilePage.newPostText =""
+    state.profilePage.newPostText = ""
 
     rerenderEntireTree({state});
 }
 
-export let updateNewPostText = (newText: any) => {
+export const updateNewPostText = (newText: any) => {
     state.profilePage.newPostText = newText;
     rerenderEntireTree({state});
 }
 
-export let addDialogs = (name: any) => {
+export const addDialogs = (name: any) => {
     let addDialogs = {
         id: 7,
         name: name
@@ -63,4 +66,9 @@ export let addDialogs = (name: any) => {
     rerenderEntireTree({state})
 }
 
+export const subscribe = (observer: any) => {
+rerenderEntireTree = observer;
+}
+
 export default state;
+

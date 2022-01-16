@@ -33,6 +33,7 @@ let store = {
             ],
         },
     },
+
     getState() {
         return this._state
     },
@@ -40,6 +41,7 @@ let store = {
     _rerenderEntireTree() {
         console.log("state changed");
     },
+
     addPost() {
         let newPost = {
             id: 5,
@@ -52,10 +54,12 @@ let store = {
 
         this._rerenderEntireTree();
     },
+
     updateNewPostText(newText: any) {
         this._state.profilePage.newPostText = newText;
         this._rerenderEntireTree();
     },
+
     addDialogs(name: any) {
         let addDialogs = {
             id: 7,
@@ -64,10 +68,10 @@ let store = {
         this._state.dialogsPage.dialogs.push(addDialogs)
         this._rerenderEntireTree()
     },
+
     subscribe(observer: any) {
         this._rerenderEntireTree = observer;
     }
-
 }
 
 export default store;

@@ -7,7 +7,7 @@ import App from "./App";
 import store from "./redux/state";
 
 
-let rerenderEntireTree = (props:any) => {
+let rerenderEntireTree = (props: any) => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>

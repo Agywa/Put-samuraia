@@ -1,7 +1,55 @@
 import React from 'react';
 
+const ADD_POST = "ADD-POST";
+const UPDATE_NEW_POST_TEXT = {type: "UPDATE-NEW-POST-TEXT"};
+const UPDATE_NEW_MESSAGE_BODY = {type: "UPDATE_NEW_MESSAGE_BODY"};
+const SEND_MESSAGE = "SEND_MESSAGE"
 
-let store = {
+
+
+type MessageType = {
+    id: number
+    message: string
+}
+
+type DialogType = {
+    id: number
+    name: string
+}
+type PostType = {
+    id: number
+    message: string
+    likesCount:number
+}
+
+type ProfilePageType = {
+    posts : Array<PostType>
+    newPostText:string
+}
+type DialogPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    newMessageBody:string
+}
+
+type RootStateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogPageType
+}
+type StoreType ={
+    _state: RootStateType
+    _callSubscriber: () => void
+    getState: ()=> void
+    subscribe: (observer:any) => void
+    dispatch: (action: any) => void
+
+}
+
+type SidebarType = {}
+
+
+let store: StoreType = {
+
     _state: {
         profilePage: {
             posts: [
@@ -15,14 +63,6 @@ let store = {
         },
 
         dialogsPage: {
-            messages: [
-                {id: 1, message: "Hi"},
-                {id: 2, message: "How is your it-kamasutra?"},
-                {id: 3, message: "Yo"},
-                {id: 4, message: "Yo"},
-                {id: 5, message: "Yo"},
-
-            ],
             dialogs: [
                 {id: 1, name: "Dimych"},
                 {id: 2, name: "Andrei"},
@@ -31,6 +71,15 @@ let store = {
                 {id: 5, name: "Vuktor"},
                 {id: 6, name: "Valera"},
             ],
+
+            messages: [
+                {id: 1, message: "Hi"},
+                {id: 2, message: "How is your it-kamasutra?"},
+                {id: 3, message: "Yo"},
+                {id: 4, message: "Yo"},
+                {id: 5, message: "Yo"},
+            ],
+            newMessageBody: ""
         },
     },
     _callSubscriber() {
@@ -46,25 +95,48 @@ let store = {
 
 
     dispatch(action: any) { //{type: "ADD-POST"}
-        if (action.type === "ADD-POST") {
-            let newPost = {
+        if (action.type === ADD_POST) {
+            let newPost : PostType = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
                 likesCount: 0
             };
-            debugger;
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = ""
 
             this._callSubscriber();
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber();
+        } else if (action.type === SEND_MESSAGE) {
+            let addDialogs = {
+                id: 7,
+                message: this._state.dialogsPage.newMessageBody,
+            };
+
+            this._state.dialogsPage.messages.push(addDialogs);
+            this._state.dialogsPage.newMessageBody = "";
+            this._callSubscriber();
+
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageBody = action.body;
             this._callSubscriber();
         }
     }
-
-
 }
+
+
+export const addPostActionCreator = () => ({type: ADD_POST})
+export const updateNewPostTextActionCreator = (text: string | undefined) =>
+    ({type: UPDATE_NEW_POST_TEXT, newText: text})
+
+
+export const sendMessageCreator = () => ({type: SEND_MESSAGE})
+
+export const updateNewMessageBodyCreator = (body: string | undefined) => ({
+    type: UPDATE_NEW_MESSAGE_BODY, body:body
+})
+
 
 export default store;
 

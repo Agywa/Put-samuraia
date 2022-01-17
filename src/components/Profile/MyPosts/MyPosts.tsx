@@ -1,24 +1,22 @@
 import React, {KeyboardEvent} from 'react';
 import s from "./MyPosts.module.css"
 import Post from "./Posts/Post";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";
 
 
 const MyPosts = (props: any) => {
 
-    let postsElements =
-        props.posts.map((p: any) => <Post message={p.message} likesCount={p.likesCount}/>)
+    let postsElements = props.posts.map((p: any) => <Post message={p.message} likesCount={p.likesCount}/>)
 
-    let newPostElement = React.createRef<any>();
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let addPosts = () => {
-        //props.addPost();
-        props.dispatch({type: "ADD-POST"})
+        props.dispatch(addPostActionCreator())
     }
 
     let onPostChange = () => {
-        let text = newPostElement.current.value;
-        // props.updateNewPostText(text);
-        let action = {type: "UPDATE-NEW-POST-TEXT", newText: text};
+        let text = newPostElement.current?.value;
+        let action = updateNewPostTextActionCreator(text);
         props.dispatch(action)
     }
 

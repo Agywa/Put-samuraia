@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
@@ -28,6 +28,12 @@ const Dialogs = (props: DialogsType) => {
         props.dispatch(updateNewMessageBodyCreator(body));
     }
 
+    const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === "Enter") {
+            onSendMessageClick()
+        }
+    }
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -40,6 +46,7 @@ const Dialogs = (props: DialogsType) => {
             <textarea
                 value={props.state.newMessageBody}
                 onChange={onNewMessageChange}
+                onKeyPress ={onKeyPressHandler}
                 placeholder="Enter Your message"
             />
             <div>

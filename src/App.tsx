@@ -15,7 +15,7 @@ type AppPropsType = {
     dispatch: (action: any) => void
 }
 
-const App = (props: AppPropsType) => {
+const App: React.FC<AppPropsType> = (props) => {
 
     return (
 

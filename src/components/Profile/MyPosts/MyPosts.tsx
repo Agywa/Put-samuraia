@@ -39,7 +39,10 @@ const MyPosts = (props: MyPostsType) => {
                     <textarea
                         onChange={onPostChange}
                         value={props.posts.newPostText}
-                        onKeyPress={onKeyPressHandler}/>
+                        onKeyPress={onKeyPressHandler}
+                        placeholder= "Enter Your message"
+                    />
+
                 </div>
                 <div>
                     <button onClick={addPosts}>Add post</button>

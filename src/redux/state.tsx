@@ -1,17 +1,13 @@
-import React from 'react';
-
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = {type: "UPDATE-NEW-POST-TEXT"};
 const UPDATE_NEW_MESSAGE_BODY = {type: "UPDATE_NEW_MESSAGE_BODY"};
 const SEND_MESSAGE = "SEND_MESSAGE"
 
 
-
 export type MessageType = {
     id: number
     message: string
 }
-
 export type DialogType = {
     id: number
     name: string
@@ -19,36 +15,45 @@ export type DialogType = {
 export type PostType = {
     id: number
     message: string
-    likesCount:number
+    likesCount: number
 }
-
 export type ProfilePageType = {
-    posts : Array<PostType>
-    newPostText:string
+    posts: Array<PostType>
+    newPostText: string
 }
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageBody:string
+    newMessageBody: string
 }
-
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
 }
-export type StoreType ={
+
+export type AddPostActionType = {
+    type: "ADD_POST"
+    newPostText: string
+}
+export type UpdateNewPostTextType = {
+    type: "UPDATE_NEW_POST_TEXT"
+    newText: string
+}
+
+export type ActionTypes = AddPostActionType | UpdateNewPostTextType
+
+export type StoreType = {
     _state: RootStateType
     _callSubscriber: () => void
-    getState: ()=> any
-    subscribe: (observer:any) => void
+    getState: () => RootStateType
+    subscribe: (observer: any) => void
     dispatch: (action: any) => void
 
 }
-
 type SidebarType = {}
 
 
-let store: StoreType = {
+export let store: StoreType = {
 
     _state: {
         profilePage: {
@@ -58,8 +63,7 @@ let store: StoreType = {
                 {id: 3, message: "Bla Bla", likesCount: 11},
                 {id: 4, message: "Dada", likesCount: 11},
             ],
-            newPostText: "it_kamasutra.com"
-
+            newPostText: ""
         },
 
         dialogsPage: {
@@ -82,6 +86,7 @@ let store: StoreType = {
             newMessageBody: ""
         },
     },
+
     _callSubscriber() {
         console.log("state changed");
     },
@@ -89,14 +94,14 @@ let store: StoreType = {
     getState() {
         return this._state
     },
-    subscribe(observer: any) {
+
+    subscribe(observer) {
         this._callSubscriber = observer;
     },
 
-
-    dispatch(action: any) { //{type: "ADD-POST"}
+    dispatch(action) {
         if (action.type === ADD_POST) {
-            let newPost : PostType = {
+            let newPost: PostType = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
                 likesCount: 0
@@ -133,37 +138,7 @@ export const updateNewPostTextActionCreator = (text: string) =>
 
 export const sendMessageCreator = () => ({type: SEND_MESSAGE})
 
-export const updateNewMessageBodyCreator = (body: string ) => ({
-    type: UPDATE_NEW_MESSAGE_BODY, body:body
+export const updateNewMessageBodyCreator = (body: string) => ({
+    type: UPDATE_NEW_MESSAGE_BODY, body: body
 })
 
-
-export default store;
-
-
-//
-// addPost() {
-//     let newPost = {
-//         id: 5,
-//         message: this._state.profilePage.newPostText,
-//         likesCount: 0
-//     };
-//
-//     this._state.profilePage.posts.push(newPost);
-//     this._state.profilePage.newPostText = ""
-//
-//     this._callSubscriber();
-// },
-// updateNewPostText(newText: any) {
-//     this._state.profilePage.newPostText = newText;
-//     this._callSubscriber();
-// },
-//
-// addDialogs(name: any) {
-//     let addDialogs = {
-//         id: 7,
-//         name: name
-//     };
-//     this._state.dialogsPage.dialogs.push(addDialogs)
-//     this._callSubscriber()
-// },

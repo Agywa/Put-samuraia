@@ -1,23 +1,28 @@
-import React, {KeyboardEvent} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from "./MyPosts.module.css"
 import Post from "./Posts/Post";
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";
+import {addPostActionCreator, ProfilePageType, updateNewPostTextActionCreator} from "../../../redux/state";
 
+type MyPostsType = {
+    posts: ProfilePageType
+    dispatch: (action: any) => void
+}
 
-const MyPosts = (props: any) => {
+const MyPosts = (props: MyPostsType) => {
 
-    let postsElements = props.posts.map((p: any) => <Post message={p.message} likesCount={p.likesCount}/>)
+    let postsElements = props.posts.posts.map((p: any) => <Post key={p.id} message={p.message}
+                                                                likesCount={p.likesCount}/>)
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let addPosts = () => {
         props.dispatch(addPostActionCreator())
     }
 
-    let onPostChange = () => {
-        let text = newPostElement.current?.value;
+    let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let text = e.currentTarget.value;
         let action = updateNewPostTextActionCreator(text);
-        props.dispatch(action)
+        props.dispatch(action);
+
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -33,8 +38,7 @@ const MyPosts = (props: any) => {
                 <div>
                     <textarea
                         onChange={onPostChange}
-                        ref={newPostElement}
-                        value={props.newPostText}
+                        value={props.posts.newPostText}
                         onKeyPress={onKeyPressHandler}/>
                 </div>
                 <div>

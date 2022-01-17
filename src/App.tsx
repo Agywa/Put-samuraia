@@ -8,16 +8,14 @@ import {Route, Routes} from "react-router-dom"
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
+import {RootStateType} from "./redux/state";
 
-/*
 type AppPropsType = {
-    posts: Array<any>
-    dialogs: Array<any>
-    messages: Array<any>
+    state: RootStateType
+    dispatch: (action: any) => void
 }
-*/
 
-const App = (props: any) => {
+const App = (props: AppPropsType) => {
 
     return (
 
@@ -34,6 +32,7 @@ const App = (props: any) => {
                     <Route path="/dialogs" element={<Dialogs
                         state={props.state.dialogsPage}
                         dispatch={props.dispatch}
+
 
                     />}/>
 

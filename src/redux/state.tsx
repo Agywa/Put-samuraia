@@ -7,39 +7,39 @@ const SEND_MESSAGE = "SEND_MESSAGE"
 
 
 
-type MessageType = {
+export type MessageType = {
     id: number
     message: string
 }
 
-type DialogType = {
+export type DialogType = {
     id: number
     name: string
 }
-type PostType = {
+export type PostType = {
     id: number
     message: string
     likesCount:number
 }
 
-type ProfilePageType = {
+export type ProfilePageType = {
     posts : Array<PostType>
     newPostText:string
 }
-type DialogPageType = {
+export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageBody:string
 }
 
-type RootStateType = {
+export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
 }
-type StoreType ={
+export type StoreType ={
     _state: RootStateType
     _callSubscriber: () => void
-    getState: ()=> void
+    getState: ()=> any
     subscribe: (observer:any) => void
     dispatch: (action: any) => void
 
@@ -109,7 +109,7 @@ let store: StoreType = {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber();
         } else if (action.type === SEND_MESSAGE) {
-            let addDialogs = {
+            let addDialogs: MessageType = {
                 id: 7,
                 message: this._state.dialogsPage.newMessageBody,
             };
@@ -127,13 +127,13 @@ let store: StoreType = {
 
 
 export const addPostActionCreator = () => ({type: ADD_POST})
-export const updateNewPostTextActionCreator = (text: string | undefined) =>
+export const updateNewPostTextActionCreator = (text: string) =>
     ({type: UPDATE_NEW_POST_TEXT, newText: text})
 
 
 export const sendMessageCreator = () => ({type: SEND_MESSAGE})
 
-export const updateNewMessageBodyCreator = (body: string | undefined) => ({
+export const updateNewMessageBodyCreator = (body: string ) => ({
     type: UPDATE_NEW_MESSAGE_BODY, body:body
 })
 

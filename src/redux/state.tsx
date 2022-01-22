@@ -2,12 +2,6 @@ import profileReducer from "./profile_reducer";
 import dialogsReducer from "./dialogs_reducer";
 import sidebarReducer from "./sidebar_reducer";
 
-const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = {type: "UPDATE-NEW-POST-TEXT"};
-const UPDATE_NEW_MESSAGE_BODY = {type: "UPDATE_NEW_MESSAGE_BODY"};
-const SEND_MESSAGE = "SEND_MESSAGE"
-
-
 export type MessageType = {
     id: number
     message: string
@@ -37,15 +31,26 @@ export type RootStateType = {
 }
 
 export type AddPostActionType = {
-    type: "ADD_POST"
+    type: "ADD-POST"
     newPostText: string
 }
 export type UpdateNewPostTextType = {
-    type: "UPDATE_NEW_POST_TEXT"
+    type: "UPDATE-NEW-POST-TEXT"
     newText: string
 }
+export type UpdateNewMessageBody = {
+    type: "UPDATE-NEW-MESSAGE-BODY"
+    body: string
+}
+export type SendMessage = {
+    type: "SEND-MESSAGE"
+    newMessageBody: string
+}
 
-export type ActionTypes = AddPostActionType | UpdateNewPostTextType
+export type ActionTypes = AddPostActionType
+    | UpdateNewPostTextType
+    | UpdateNewMessageBody
+    | SendMessage
 
 export type StoreType = {
     _state: RootStateType
@@ -105,7 +110,7 @@ export let store: StoreType = {
         this._callSubscriber = observer;
     },
 
-    dispatch(action) {
+    dispatch(action: ActionTypes) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)

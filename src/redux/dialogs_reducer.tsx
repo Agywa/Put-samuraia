@@ -1,11 +1,11 @@
 import React from "react";
-import {MessageType} from "./state";
+import {ActionTypes, DialogPageType, MessageType} from "./state";
 
 
-const UPDATE_NEW_MESSAGE_BODY = {type: "UPDATE_NEW_MESSAGE_BODY"};
-const SEND_MESSAGE = "SEND_MESSAGE"
+const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
+const SEND_MESSAGE = "SEND-MESSAGE"
 
-const dialogsReducer = (state: any, action: any) => {
+const dialogsReducer = (state: DialogPageType, action: ActionTypes) => {
 
 
     switch (action.type) {

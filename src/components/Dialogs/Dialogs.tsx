@@ -5,7 +5,6 @@ import DialogItem from "./DialogItem/DialogItem";
 import {DialogType, MessageType} from "../../redux/store";
 
 
-
 type DialogsType = {
     messagePage: Array<MessageType>
     dialogsPage: Array<DialogType>

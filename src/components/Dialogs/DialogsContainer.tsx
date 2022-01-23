@@ -17,6 +17,8 @@ const DialogsContainer = (props: DialogsContainerType) => {
     let onNewMessageChange = (body: string) => {
         props.dispatch(updateNewMessageBodyCreator(body));
     }
+
+
     return (
         <Dialogs
             dialogsPage={props.state.dialogs}

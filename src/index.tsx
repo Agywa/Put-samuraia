@@ -7,8 +7,8 @@ import {rerenderEntireTree} from "./rerenderEntireTree";
 
 rerenderEntireTree(store.getState());
 store.subscribe(() => {
-let state = store.getState();
-    rerenderEntireTree (state);
+    let state = store.getState();
+    rerenderEntireTree(state);
 });
 
 

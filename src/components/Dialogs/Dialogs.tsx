@@ -50,7 +50,7 @@ const Dialogs = (props: DialogsType) => {
                     placeholder="Enter Your message"
                 />
                 <div>
-                    <button onClick={onSendMessageClick}> send</button>
+                    <button onClick={onSendMessageClick}>send</button>
                 </div>
             </div>
         </div>

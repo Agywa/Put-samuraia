@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from "./MyPosts.module.css"
 import Post from "./Posts/Post";
+import {PostType, ProfilePageType} from "../../../redux/store";
 
 type MyPostsType = {
     posts: any
@@ -11,7 +12,7 @@ type MyPostsType = {
 
 const MyPosts = (props: MyPostsType) => {
 
-    let postsElements = props.posts.posts.map((p: any) =>
+    let postsElements = props.posts.posts.map((p: PostType) =>
         <Post key={p.id} message={p.message}
               likesCount={p.likesCount}/>)
 

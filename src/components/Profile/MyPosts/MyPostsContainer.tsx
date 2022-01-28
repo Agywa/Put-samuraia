@@ -14,7 +14,7 @@ const MyPostsContainer = (props: MyPostsContainerType) => {
         props.dispatch(addPostActionCreator())
     }
 
-    let onPostChange = (text: any) => {
+    let onPostChange = (text: string) => {
         let action = updateNewPostTextActionCreator(text);
         props.dispatch(action);
 

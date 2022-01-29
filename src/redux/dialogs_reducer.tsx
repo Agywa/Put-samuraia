@@ -6,6 +6,7 @@ const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
 const SEND_MESSAGE = "SEND-MESSAGE"
 
 let initialState =   {
+
     dialogs: [
         {id: 1, name: "Dimych"},
         {id: 2, name: "Andrei"},
@@ -26,7 +27,7 @@ let initialState =   {
 }
 
 
-const dialogsReducer = (state: DialogPageType = initialState, action: ActionTypes) => {
+const dialogsReducer = (state: DialogPageType = initialState, action: ActionTypes):DialogPageType => {
 
 
     switch (action.type) {
@@ -35,13 +36,14 @@ const dialogsReducer = (state: DialogPageType = initialState, action: ActionType
                 id: 7,
                 message: state.newMessageBody,
             };
-
-            state.messages.push(addDialogs);
-            state.newMessageBody = "";
-            return state;
+            const copyState = {...state}
+            copyState.messages.push(addDialogs);
+            copyState.newMessageBody = "";
+            return copyState;
         case UPDATE_NEW_MESSAGE_BODY:
             state.newMessageBody = action.body;
-            return state;
+            const copyStatet1= {...state}
+            return copyStatet1;
         default:
             return state;
     }

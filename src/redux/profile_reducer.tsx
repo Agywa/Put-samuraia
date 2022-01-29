@@ -22,12 +22,14 @@ let initialState = {
                  message: state.newPostText,
                  likesCount: 0
              };
-             state.posts.push(newPost);
-             state.newPostText = ""
-             return state;
+             const copyState1 = {...state}
+             copyState1.posts.push(newPost);
+             copyState1.newPostText = ""
+             return copyState1;
          case UPDATE_NEW_POST_TEXT:
-             state.newPostText = action.newText;
-             return state;
+             const copyState = {...state}
+             copyState.newPostText = action.newText;
+             return copyState;
          default: return state;
      }
 }

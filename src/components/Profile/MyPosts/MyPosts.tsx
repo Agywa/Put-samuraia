@@ -7,7 +7,6 @@ type MyPostsType = {
     profilePage: ProfilePageType
     updateNewPostText: (text: string) => void
     addPost: () => void
-
 }
 
 const MyPosts = (props: MyPostsType) => {
@@ -27,7 +26,7 @@ const MyPosts = (props: MyPostsType) => {
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
 
-        if ((e.ctrlKey) &&( e.key === "Enter")) {
+        if (e.key === "Enter") {
             onAddPosts()
         }
     }

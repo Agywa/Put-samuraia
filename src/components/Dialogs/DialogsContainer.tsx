@@ -5,14 +5,12 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 
-
 let mapStateToProps = (store:RootStateType ) => {
   return{
       dialogPage:store.dialogsPage
   }
 
 }
-
 
 let mapDispatchToProps = (dispatch:Dispatch) => {
     return {

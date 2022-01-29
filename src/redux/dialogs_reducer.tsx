@@ -1,5 +1,5 @@
 import React from "react";
-import {ActionTypes, DialogPageType, MessageType} from "./store";
+import {ActionTypes, DialogPageType} from "./store";
 
 
 const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
@@ -31,24 +31,19 @@ const dialogsReducer = (state: DialogPageType = initialState, action: ActionType
 
 
     switch (action.type) {
-
-        case SEND_MESSAGE: {
-            let addDialogs: MessageType = {
-                id: 7,
-                message: state.newMessageBody,
+        case UPDATE_NEW_MESSAGE_BODY:
+            return {
+                ...state,
+                newMessageBody: action.body,
             };
-            const copyState = {...state}
-            copyState.messages = [...state.messages]
-            copyState.messages.push(addDialogs);
-            copyState.newMessageBody = "";
-            return copyState;
-        }
+        case SEND_MESSAGE:
+            let body = state.newMessageBody;
+            return {
+                ...state,
+                newMessageBody: "",
+                messages: [...state.messages, {id: 6, message: body}],
+            };
 
-        case UPDATE_NEW_MESSAGE_BODY: {
-            state.newMessageBody = action.body;
-            const copyState = {...state}
-            return copyState;
-        }
         default:
             return state;
     }

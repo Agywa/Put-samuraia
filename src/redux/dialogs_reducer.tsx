@@ -5,7 +5,7 @@ import {ActionTypes, DialogPageType, MessageType} from "./store";
 const UPDATE_NEW_MESSAGE_BODY = "UPDATE-NEW-MESSAGE-BODY";
 const SEND_MESSAGE = "SEND-MESSAGE"
 
-let initialState =   {
+let initialState = {
 
     dialogs: [
         {id: 1, name: "Dimych"},
@@ -16,34 +16,39 @@ let initialState =   {
         {id: 6, name: "Valera"},
     ],
 
-        messages: [
+    messages: [
         {id: 1, message: "Hi"},
         {id: 2, message: "How is your it-kamasutra?"},
         {id: 3, message: "Yo"},
         {id: 4, message: "Yo"},
         {id: 5, message: "Yo"},
     ],
-        newMessageBody: ""
+    newMessageBody: ""
 }
 
 
-const dialogsReducer = (state: DialogPageType = initialState, action: ActionTypes):DialogPageType => {
+const dialogsReducer = (state: DialogPageType = initialState, action: ActionTypes): DialogPageType => {
 
 
     switch (action.type) {
-        case SEND_MESSAGE:
+
+        case SEND_MESSAGE: {
             let addDialogs: MessageType = {
                 id: 7,
                 message: state.newMessageBody,
             };
             const copyState = {...state}
+            copyState.messages = [...state.messages]
             copyState.messages.push(addDialogs);
             copyState.newMessageBody = "";
             return copyState;
-        case UPDATE_NEW_MESSAGE_BODY:
+        }
+
+        case UPDATE_NEW_MESSAGE_BODY: {
             state.newMessageBody = action.body;
-            const copyStatet1= {...state}
-            return copyStatet1;
+            const copyState = {...state}
+            return copyState;
+        }
         default:
             return state;
     }

@@ -2,30 +2,30 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import {DialogPageType, sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/state";
+import {DialogPageType, DialogType, MessageType} from "../../redux/store";
 
 
 type DialogsType = {
-    state: DialogPageType
-    dispatch: (action: any) => void
-
-
+    // messagePage: Array<MessageType>
+    dialogPage: DialogPageType
+    updateNewMessageBody: (body: string) => void
+    sendMessage: () => void
+    // newMessageBody: string
 }
 
 const Dialogs = (props: DialogsType) => {
 
-    let dialogsElements = props.state.dialogs.map((d: any) => <DialogItem name={d.name} id={d.id}/>)
+    let dialogsElements = props.dialogPage.dialogs.map((d:DialogType ) => <DialogItem name={d.name} id={d.id}/>)
 
-    let messagesElements = props.state.messages.map((m: any) => <Message message={m.message}/>)
+    let messagesElements = props.dialogPage.messages.map((m:MessageType ) => <Message message={m.message}/>)
 
     let onSendMessageClick = () => {
-        props.dispatch(sendMessageCreator())
-        //props.dispatch(updateNewMessageBodyCreator(''));
+        props.sendMessage()
     }
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        //let body = e.target.value
         let body = e.currentTarget.value
-        props.dispatch(updateNewMessageBodyCreator(body));
+        props.updateNewMessageBody(body)
+
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -39,20 +39,20 @@ const Dialogs = (props: DialogsType) => {
             <div className={s.dialogsItems}>
                 {dialogsElements}
             </div>
-
-            <div className={s.messages}>
-                <div>{messagesElements}</div>
-            </div>
-            <textarea
-                value={props.state.newMessageBody}
-                onChange={onNewMessageChange}
-                onKeyPress ={onKeyPressHandler}
-                placeholder="Enter Your message"
-            />
             <div>
-                <button onClick={onSendMessageClick}> send</button>
+                <div className={s.messages}>
+                    <div>{messagesElements}</div>
+                </div>
+                <textarea
+                    value={props.dialogPage.newMessageBody}
+                    onChange={onNewMessageChange}
+                    onKeyPress={onKeyPressHandler}
+                    placeholder="Enter Your message"
+                />
+                <div>
+                    <button onClick={onSendMessageClick}>send</button>
+                </div>
             </div>
-
         </div>
     )
 }

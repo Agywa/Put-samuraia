@@ -1,33 +1,34 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from "./MyPosts.module.css"
 import Post from "./Posts/Post";
-import {addPostActionCreator, ProfilePageType, updateNewPostTextActionCreator} from "../../../redux/state";
+import {ProfilePageType} from "../../../redux/store";
 
 type MyPostsType = {
-    posts: ProfilePageType
-    dispatch: (action: any) => void
+    profilePage: ProfilePageType
+    updateNewPostText: (text: string) => void
+    addPost: () => void
+
 }
 
 const MyPosts = (props: MyPostsType) => {
 
-    let postsElements = props.posts.posts.map((p: any) => <Post key={p.id} message={p.message}
-                                                                likesCount={p.likesCount}/>)
+    let postsElements = props.profilePage.posts.map((p: any) =>
+        <Post key={p.id} message={p.message}
+              likesCount={p.likesCount}/>)
 
-
-    let addPosts = () => {
-        props.dispatch(addPostActionCreator())
+    let onAddPosts = () => {
+        props.addPost()
     }
 
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let text = e.currentTarget.value;
-        let action = updateNewPostTextActionCreator(text);
-        props.dispatch(action);
-
+        let text = e.currentTarget.value
+        props.updateNewPostText(text)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === "Enter") {
-            addPosts()
+
+        if ((e.ctrlKey) &&( e.key === "Enter")) {
+            onAddPosts()
         }
     }
 
@@ -38,14 +39,14 @@ const MyPosts = (props: MyPostsType) => {
                 <div>
                     <textarea
                         onChange={onPostChange}
-                        value={props.posts.newPostText}
+                        value={props.profilePage.newPostText}
                         onKeyPress={onKeyPressHandler}
-                        placeholder= "Enter Your message"
+                        placeholder="Enter your post"
                     />
 
                 </div>
                 <div>
-                    <button onClick={addPosts}>Add post</button>
+                    <button onClick={onAddPosts}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>

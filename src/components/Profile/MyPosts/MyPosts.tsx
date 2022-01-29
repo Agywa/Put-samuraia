@@ -1,18 +1,18 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from "./MyPosts.module.css"
 import Post from "./Posts/Post";
-import {PostType, ProfilePageType} from "../../../redux/store";
+import {ProfilePageType} from "../../../redux/store";
 
 type MyPostsType = {
-    posts: any
+    profilePage: ProfilePageType
     updateNewPostText: (text: string) => void
     addPost: () => void
-    newPostText: string
+
 }
 
 const MyPosts = (props: MyPostsType) => {
 
-    let postsElements = props.posts.posts.map((p: PostType) =>
+    let postsElements = props.profilePage.posts.map((p: any) =>
         <Post key={p.id} message={p.message}
               likesCount={p.likesCount}/>)
 
@@ -26,7 +26,8 @@ const MyPosts = (props: MyPostsType) => {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === "Enter") {
+
+        if ((e.ctrlKey) &&( e.key === "Enter")) {
             onAddPosts()
         }
     }
@@ -38,7 +39,7 @@ const MyPosts = (props: MyPostsType) => {
                 <div>
                     <textarea
                         onChange={onPostChange}
-                        value={props.newPostText}
+                        value={props.profilePage.newPostText}
                         onKeyPress={onKeyPressHandler}
                         placeholder="Enter your post"
                     />

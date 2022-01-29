@@ -2,22 +2,22 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
-import {DialogType, MessageType} from "../../redux/store";
+import {DialogPageType, DialogType, MessageType} from "../../redux/store";
 
 
 type DialogsType = {
-    messagePage: Array<MessageType>
-    dialogsPage: Array<DialogType>
+    // messagePage: Array<MessageType>
+    dialogPage: DialogPageType
     updateNewMessageBody: (body: string) => void
     sendMessage: () => void
-    newMessageBody: string
+    // newMessageBody: string
 }
 
 const Dialogs = (props: DialogsType) => {
 
-    let dialogsElements = props.dialogsPage.map((d: any) => <DialogItem name={d.name} id={d.id}/>)
+    let dialogsElements = props.dialogPage.dialogs.map((d:DialogType ) => <DialogItem name={d.name} id={d.id}/>)
 
-    let messagesElements = props.messagePage.map((m: any) => <Message message={m.message}/>)
+    let messagesElements = props.dialogPage.messages.map((m:MessageType ) => <Message message={m.message}/>)
 
     let onSendMessageClick = () => {
         props.sendMessage()
@@ -44,7 +44,7 @@ const Dialogs = (props: DialogsType) => {
                     <div>{messagesElements}</div>
                 </div>
                 <textarea
-                    value={props.newMessageBody}
+                    value={props.dialogPage.newMessageBody}
                     onChange={onNewMessageChange}
                     onKeyPress={onKeyPressHandler}
                     placeholder="Enter Your message"

@@ -11,6 +11,7 @@ export type PostType = {
     message: string
     likesCount: number
 }
+
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
@@ -43,10 +44,12 @@ export type SendMessage = {
     newMessageBody: string
 }
 
+
 export type ActionTypes = AddPostActionType
     | UpdateNewPostTextType
     | UpdateNewMessageBody
     | SendMessage
+
 
 //
 // export type StoreType = {

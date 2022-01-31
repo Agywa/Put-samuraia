@@ -27,6 +27,22 @@ export type RootStateType = {
     sidebar: any
 }
 
+export type LocationUsersType = {
+    city: string,
+    country: string
+}
+export type UsersType = {
+    id: number,
+    followed: boolean,
+    fullName: string,
+    status: string,
+    location: Array<LocationUsersType>
+}
+export type UsersPageType = {
+    users: Array<UsersType>
+}
+
+
 export type AddPostActionType = {
     type: "ADD-POST"
     newPostText: string
@@ -44,12 +60,28 @@ export type SendMessage = {
     newMessageBody: string
 }
 
+export type FollowUsers = {
+    type: "FOLLOW"
+    usersID: number
+}
+export type UnfollowUsers = {
+    type: "UNFOLLOW"
+    usersID: number
+}
 
-export type ActionTypes = AddPostActionType
+export type SetUsersType = {
+    type: "SET_USERS"
+    users: any
+}
+
+export type ActionTypes =
+    AddPostActionType
     | UpdateNewPostTextType
     | UpdateNewMessageBody
     | SendMessage
-
+    | FollowUsers
+    | UnfollowUsers
+    | SetUsersType
 
 //
 // export type StoreType = {

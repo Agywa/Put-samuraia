@@ -5,9 +5,9 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 
-let mapStateToProps = (store:RootStateType ) => {
+let mapStateToProps = (state:RootStateType ) => {
   return{
-      dialogPage:store.dialogsPage
+      dialogPage:state.dialogsPage
   }
 
 }

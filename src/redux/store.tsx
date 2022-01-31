@@ -27,20 +27,21 @@ export type RootStateType = {
     sidebar: any
 }
 
-export type LocationUsersType = {
-    city: string,
-    country: string
-}
-export type UsersType = {
-    id: number,
-    followed: boolean,
-    fullName: string,
-    status: string,
-    location: Array<LocationUsersType>
-}
-export type UsersPageType = {
-    users: Array<UsersType>
-}
+// export type LocationUsersType = {
+//     city: string,
+//     country: string
+// }
+// export type UsersType = {
+//     id: number,
+//     photoUrl: string
+//     followed: boolean,
+//     fullName: string,
+//     status: string,
+//     location:LocationUsersType
+// }
+// export type UsersPageType = {
+//     users: Array<UsersType>
+// }
 
 
 export type AddPostActionType = {
@@ -68,7 +69,6 @@ export type UnfollowUsers = {
     type: "UNFOLLOW"
     usersID: number
 }
-
 export type SetUsersType = {
     type: "SET_USERS"
     users: any

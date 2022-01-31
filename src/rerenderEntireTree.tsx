@@ -8,13 +8,13 @@ import {RootStateType} from "./redux/store";
 
 export let rerenderEntireTree = (props: RootStateType) => {
     ReactDOM.render(
-        <React.StrictMode>
+
             <BrowserRouter>
                 <Provider store={store}>
                 <App />
                 </Provider>
             </BrowserRouter>
-        </React.StrictMode>,
+       ,
         document.getElementById('root')
     );
 }

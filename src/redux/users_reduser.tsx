@@ -1,42 +1,39 @@
 import React from "react";
-import {ActionTypes, UsersPageType} from "./store";
+import {ActionTypes} from "./store";
 
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 
-let initialState = {
-    users: [
-        //     {
-        //         id: 1,
-        //         followed: false,
-        //         fullName: "Dmitry",
-        //         status: "I am a boss",
-        //         location: {city: "Minsk", country: "Belarus"}
-        //     },
-        //     {
-        //         id: 2,
-        //         followed: true,
-        //         fullName: "Sasha",
-        //         status: "I am a boss too",
-        //         location: {city: "Moscow", country: "Russia"}
-        //     },
-        //     {
-        //         id: 3,
-        //         followed: false,
-        //         fullName: "Andrew",
-        //         status: "I am a boss too",
-        //         location: {city: "Kiev", country: "Ukraine"}
-        //     },
-    ],
+
+export type LocationUsersType = {
+    city: string,
+    country: string
+}
+export type UserType= {
+    id: number,
+    photoUrl: string
+    followed: boolean,
+    fullName: string,
+    status: string,
+    location:LocationUsersType
 }
 
-const usersReducer = (state: any = initialState, action: ActionTypes) => {
+export type initialStateType = {
+    users: Array<UserType>
+}
+
+let initialState:initialStateType = {
+    users: [],
+}
+
+
+const usersReducer = (state: initialStateType = initialState, action: ActionTypes):initialStateType => {
     switch (action.type) {
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map((u: any) => {
+                users: state.users.map((u: UserType) => {
                     if (u.id === action.usersID) {
                         return {...u, followed: true}
                     }
@@ -46,7 +43,7 @@ const usersReducer = (state: any = initialState, action: ActionTypes) => {
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map((u: any) => {
+                users: state.users.map((u: UserType) => {
                     if (u.id === action.usersID) {
                         return {...u, followed: false}
                     }
@@ -66,4 +63,4 @@ export default usersReducer;
 
 export const followAC = (usersID: number) => ({type: FOLLOW, usersID})
 export const unfollowAC = (usersID: number) => ({type: UNFOLLOW, usersID})
-export const setUsersAC = (users: any) => ({type: SET_USERS, users})
+export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users})

@@ -11,6 +11,7 @@ export type PostType = {
     message: string
     likesCount: number
 }
+
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
@@ -25,6 +26,22 @@ export type RootStateType = {
     dialogsPage: DialogPageType
     sidebar: any
 }
+
+export type LocationUsersType = {
+    city: string,
+    country: string
+}
+export type UsersType = {
+    id: number,
+    followed: boolean,
+    fullName: string,
+    status: string,
+    location: Array<LocationUsersType>
+}
+export type UsersPageType = {
+    users: Array<UsersType>
+}
+
 
 export type AddPostActionType = {
     type: "ADD-POST"
@@ -43,10 +60,28 @@ export type SendMessage = {
     newMessageBody: string
 }
 
-export type ActionTypes = AddPostActionType
+export type FollowUsers = {
+    type: "FOLLOW"
+    usersID: number
+}
+export type UnfollowUsers = {
+    type: "UNFOLLOW"
+    usersID: number
+}
+
+export type SetUsersType = {
+    type: "SET_USERS"
+    users: any
+}
+
+export type ActionTypes =
+    AddPostActionType
     | UpdateNewPostTextType
     | UpdateNewMessageBody
     | SendMessage
+    | FollowUsers
+    | UnfollowUsers
+    | SetUsersType
 
 //
 // export type StoreType = {

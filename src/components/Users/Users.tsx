@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./users.module.css";
 import {UserType} from "../../redux/users_reduser";
 import {UsersPropsType} from "./UsersContainer";
-import  axios from "axios";
+import axios from "axios";
 import userPhoto from "../../assets/images/user.png"
 
 
@@ -11,7 +11,8 @@ let Users = (props: UsersPropsType) => {
         axios.get(" https://social-network.samuraijs.com/api/1.0/users")
             .then(response => {
                 props.setUsers(response.data.items)
-             });}
+            });
+    }
 
     return <div>
         {

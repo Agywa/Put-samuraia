@@ -10,9 +10,9 @@ import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 
-type AppPropsType = {}
 
-const App: React.FC<AppPropsType> = (props) => {
+
+const App: React.FC = (props) => {
 
     return (
         <div className="app-wrapper">

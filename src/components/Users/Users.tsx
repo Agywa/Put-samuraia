@@ -21,7 +21,6 @@ export let Users = (props: UsersType) => {
         pages.push(i)
     }
 
-
     return <div>
         <div>
             {pages.map(p => <span

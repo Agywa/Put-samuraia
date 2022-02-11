@@ -5,16 +5,16 @@ import userPhoto from "../../assets/images/user.png";
 
 type UsersType = {
     totalUsersCount: number
-    pageSize:number
-    currentPage:number
-    onPageChanged:(pageNumber: number) => void
+    pageSize: number
+    currentPage: number
+    onPageChanged: (pageNumber: number) => void
     users: Array<UserType>
     unfollow: (usersID: number) => void
     follow: (usersID: number) => void
 }
 
 export let Users = (props: UsersType) => {
-    let pagesCount: number =Math.ceil(props.totalUsersCount / props.pageSize)
+    let pagesCount: number = Math.ceil(props.totalUsersCount / props.pageSize)
 
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -27,7 +27,7 @@ export let Users = (props: UsersType) => {
             {pages.map(p => <span
                 className={props.currentPage === p ? styles.selectedPage : ""}
                 onClick={(e) => {
-                   props.onPageChanged(p)
+                    props.onPageChanged(p)
                 }}>{p}</span>)}
         </div>
         {props.users.map((u: UserType) => <div key={u.id}>

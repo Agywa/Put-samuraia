@@ -57,8 +57,6 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         setTotalUsersCount: (totalCount:number) => {
             dispatch(setTotalUsersCountAC(totalCount))
         }
-
-
     }
 }
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)

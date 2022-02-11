@@ -6,6 +6,7 @@ const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
+const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 
 
 export type LocationUsersType = {
@@ -30,6 +31,7 @@ export type initialStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 
 }
 
@@ -38,6 +40,7 @@ let initialState: initialStateType = {
     pageSize: 90,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching: false,
 
 }
 
@@ -60,7 +63,11 @@ type SetCurrentPage = {
 }
 type setTotalUsersCount = {
     type: "SET_TOTAL_USERS_COUNT"
-    totalCount:number
+    totalCount: number
+}
+type setToggleIsFetching = {
+    type: "TOGGLE_IS_FETCHING"
+    isFetching: boolean
 }
 
 export type ActionTypes =
@@ -69,6 +76,7 @@ export type ActionTypes =
     | SetUsersType
     | SetCurrentPage
     | setTotalUsersCount
+    | setToggleIsFetching
 
 
 const usersReducer = (state: initialStateType = initialState, action: ActionTypes): initialStateType => {
@@ -100,7 +108,10 @@ const usersReducer = (state: initialStateType = initialState, action: ActionType
             return {...state, currentPage: action.currentPage}
         }
         case SET_TOTAL_USERS_COUNT: {
-            return {...state, totalUsersCount:action.totalCount}
+            return {...state, totalUsersCount: action.totalCount}
+        }
+        case "TOGGLE_IS_FETCHING" : {
+            return {...state, isFetching: action.isFetching}
         }
         default:
             return state;
@@ -115,3 +126,4 @@ export const unfollowAC = (usersID: number) => ({type: UNFOLLOW, usersID})
 export const setUsersAC = (users: Array<UserType>) => ({type: SET_USERS, users})
 export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage})
 export const setTotalUsersCountAC = (totalCount: number) => ({type: SET_TOTAL_USERS_COUNT, totalCount})
+export const toggleIsFetchingAC = (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching})

@@ -1,4 +1,5 @@
 import React from "react";
+import {ProfileAllType} from "../components/Profile/ProfileContainer";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -79,5 +80,5 @@ export default profileReducer;
 
 export const addPostActionCreator = () => ({type: ADD_POST})
 export const updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
-export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile})
+export const setUserProfile = (profile: ProfileAllType) => ({type: SET_USER_PROFILE, profile})
 

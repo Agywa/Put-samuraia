@@ -1,9 +1,8 @@
 import React from "react";
 import {
     follow,
-    getUsersThunkCreator,
+    getUsers,
     setCurrentPage,
-    setTotalUsersCount,
     setUsers,
     toggleFollowingInProgress,
     toggleIsFetching,
@@ -14,7 +13,6 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {Users} from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
 
 class UsersContainer extends React.Component<any, any> {
@@ -23,25 +21,24 @@ class UsersContainer extends React.Component<any, any> {
     // }
 
     componentDidMount() {
-        this.props.getUsersThunkCreator();
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+
+    }
+
+
+
+    // Вот Здесь все сломалось )))
+
+    onPageChanged = (pageNumber: number) => {
+        this.props.getUsers(pageNumber, this.props.pageSize);
+
+        // this.props.setCurrentPage(pageNumber)
         // this.props.toggleIsFetching(true)
-        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+        // usersAPI.getUsers(pageNumber, this.props.pageSize)
         //     .then(data => {
         //         this.props.toggleIsFetching(false)
         //         this.props.setUsers(data.items)
-        //         this.props.setTotalUsersCount(data.totalCount)
-        //
         //     });
-    }
-
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber)
-        this.props.toggleIsFetching(true)
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-            .then(data => {
-                this.props.toggleIsFetching(false)
-                this.props.setUsers(data.items)
-            });
     }
 
     render() {
@@ -94,8 +91,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 }
 
 export default connect(mapStateToProps, {
-    follow, unfollow, setUsers,
-    setCurrentPage, setTotalUsersCount, toggleIsFetching,
+    follow, unfollow,
+    setCurrentPage, toggleIsFetching, setUsers,
     toggleFollowingInProgress,
-    getUsersThunkCreator,
+    getUsers,
 })(UsersContainer)

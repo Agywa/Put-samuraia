@@ -3,7 +3,6 @@ import styles from "./users.module.css";
 import {UserType} from "../../redux/users_reduser";
 import userPhoto from "../../assets/images/user.png";
 import {NavLink} from "react-router-dom";
-import {followedUsers, unfollowedUsers, usersAPI} from "../../api/api";
 
 type UsersType = {
     totalUsersCount: number
@@ -50,7 +49,7 @@ export let Users = (props: UsersType) => {
 
                             <button disabled={props.followingInProgress.some(id => id === u.id)}
                                     onClick={() => {
-                                       props.follow(u.id)
+                                        props.follow(u.id)
                                     }}>Follow</button>}
 
                     </div>

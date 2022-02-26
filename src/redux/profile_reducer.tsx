@@ -1,5 +1,7 @@
 import React from "react";
 import {ProfileAllType} from "../components/Profile/ProfileContainer";
+import {Dispatch} from "redux";
+import {getProfile} from "../api/api";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
@@ -80,5 +82,11 @@ export default profileReducer;
 
 export const addPostActionCreator = () => ({type: ADD_POST})
 export const updateNewPostTextActionCreator = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text})
-export const setUserProfile = (profile: ProfileAllType) => ({type: SET_USER_PROFILE, profile})
+const setUserProfile = (profile: ProfileAllType) => ({type: SET_USER_PROFILE, profile})
 
+export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
+    getProfile(userId)
+        .then(response => {
+            dispatch(setUserProfile(response.data))
+        })
+}

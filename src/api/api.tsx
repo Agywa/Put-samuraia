@@ -9,7 +9,7 @@ const instance = axios.create({
 });
 
 export const usersAPI = {
-     getUsers (currentPage: number, pageSize: number) {
+    getUsers(currentPage: number, pageSize: number) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`,
             {
                 withCredentials: true
@@ -43,8 +43,20 @@ export const followedUsers = (id: number) => {
 }
 
 export const loginUsers = () => {
-    return  instance.get(` https://social-network.samuraijs.com/api/1.0/auth/me`)
+    return instance.get(`auth/me`)
         .then(response => {
             return response.data
         })
+}
+
+export const getProfile = (userId: number) => {
+    return instance.get(`profile/` + userId)
+
+}
+
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`)
+
+    }
 }

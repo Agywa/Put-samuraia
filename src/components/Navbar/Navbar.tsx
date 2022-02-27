@@ -29,6 +29,10 @@ const Navbar = () => {
                 <NavLink to="users"
                          className={({isActive}) => isActive ? s.activeNot : s.activeDat}> Users </NavLink>
             </div>
+            <div>
+                <NavLink to="login"
+                         className={({isActive}) => isActive ? s.activeNot : s.activeDat}> Login </NavLink>
+            </div>
 
         </nav>
     )

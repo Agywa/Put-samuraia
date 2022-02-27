@@ -42,12 +42,12 @@ export const followedUsers = (id: number) => {
         )
 }
 
-export const loginUsers = () => {
-    return instance.get(`auth/me`)
-        .then(response => {
-            return response.data
-        })
-}
+// export const loginUsers = () => {
+//     return instance.get(`auth/me`)
+//         .then(response => {
+//             return response.data
+//         })
+// }
 
 export const getProfile = (userId: number) => {
     return instance.get(`profile/` + userId)

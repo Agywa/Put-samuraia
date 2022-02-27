@@ -1,13 +1,14 @@
 import React from 'react';
-import {RootStateType} from "../../redux/store";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs_reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
+import {AppStateType} from "../../redux/redux-store";
 
-let mapStateToProps = (state:RootStateType ) => {
+let mapStateToProps = (state:AppStateType ) => {
   return{
-      dialogPage:state.dialogsPage
+      dialogPage:state.dialogsPage,
+      isAuth: state.auth.isAuth
   }
 
 }

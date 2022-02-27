@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getUserProfile} from "../../redux/profile_reducer";
 import {AppStateType} from "../../redux/redux-store";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 
 type ContactsType = {
@@ -36,6 +36,7 @@ export type ProfileType = {
 
 type MapStatePropsType = {
     profile: AppStateType
+    isAuth:boolean
 }
 type MapDispatchToPropsType = {
     setUserProfile: (profile: ProfileAllType) => void
@@ -44,6 +45,14 @@ type PropsType = MapStatePropsType & MapDispatchToPropsType
 
 
 const withRouter = (WrappedComponent: any) => (props: any) => {
+    let navigate = useNavigate();
+    let LoggedIn = !props.isAuth;
+    useEffect(() => {
+        if (LoggedIn) {
+            return navigate("/login");
+        }
+    }, [LoggedIn]);
+
     const params = useParams();
     return (
         <WrappedComponent
@@ -67,6 +76,7 @@ class ProfileContainer extends React.Component<any, any> {
 
 
     render() {
+
         return (
             <div>
                 <Profile
@@ -80,7 +90,8 @@ class ProfileContainer extends React.Component<any, any> {
 }
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth,
 });
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
 

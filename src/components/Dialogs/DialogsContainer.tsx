@@ -2,7 +2,7 @@ import React from 'react';
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs_reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {AppStateType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
@@ -24,6 +24,11 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
         },
     }
 }
+//  как то есть такая возможность через compose но в RR 6  не работает )))
+// compose(
+//     connect(mapStateToProps, mapDispatchToProps),
+//     withAuthRedirect,
+// )(Dialogs);
 
 let AuthRedirectComponent = withAuthRedirect(Dialogs)
 

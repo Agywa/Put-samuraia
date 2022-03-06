@@ -1,9 +1,8 @@
-import React, {ChangeEvent, KeyboardEvent, useEffect} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {DialogPageType, DialogType, MessageType} from "../../redux/store";
-import {useNavigate} from "react-router-dom";
 
 
 type DialogsType = {

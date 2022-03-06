@@ -37,15 +37,6 @@ const Dialogs = (props: DialogsType) => {
         }
     }
 
-    // if (props.isAuth === false) return {"/login"};
-    let navigate = useNavigate();
-    let LoggedIn = !props.isAuth;
-    useEffect(() => {
-        if (LoggedIn) {
-            return navigate("/login");
-        }
-    }, [LoggedIn]);
-
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>

@@ -1,19 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs_reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {AppStateType} from "../../redux/redux-store";
+import {useNavigate} from "react-router-dom";
 
-let mapStateToProps = (state:AppStateType ) => {
-  return{
-      dialogPage:state.dialogsPage,
-      isAuth: state.auth.isAuth
-  }
+let mapStateToProps = (state: AppStateType) => {
+    return {
+        dialogPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
+    }
 
 }
 
-let mapDispatchToProps = (dispatch:Dispatch) => {
+let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         updateNewMessageBody: (body: string) => {
             dispatch(updateNewMessageBodyCreator(body))
@@ -24,10 +25,21 @@ let mapDispatchToProps = (dispatch:Dispatch) => {
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+let AuthRedirectComponent = (props: any) => {
 
+    // if (props.isAuth === false) return {"/login"};
 
+    let navigate = useNavigate();
+    let LoggedIn = !props.isAuth;
+    useEffect(() => {
+        if (LoggedIn) {
+            return navigate("/login");
+        }
+    }, [LoggedIn]);
+    return <Dialogs {...props}/>
+}
 
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
 
 // type DialogsContainerType = {

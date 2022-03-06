@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {getUserProfile} from "../../redux/profile_reducer";
 import {AppStateType} from "../../redux/redux-store";
 import {useNavigate, useParams} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 type ContactsType = {
@@ -43,8 +44,10 @@ type MapDispatchToPropsType = {
 }
 type PropsType = MapStatePropsType & MapDispatchToPropsType
 
+// let AuthRedirectComponent= withAuthRedirect(ProfileContainer);
 
-const withRouter = (WrappedComponent: any) => (props: any) => {
+
+let AuthRedirectComponent = (props: any) => {
     let navigate = useNavigate();
     let LoggedIn = !props.isAuth;
     useEffect(() => {
@@ -52,7 +55,10 @@ const withRouter = (WrappedComponent: any) => (props: any) => {
             return navigate("/login");
         }
     }, [LoggedIn]);
+    return <ProfileContainer {...props}/>
+}
 
+const withRouter = (WrappedComponent: any) => (props: any) => {
     const params = useParams();
     return (
         <WrappedComponent
@@ -93,7 +99,7 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     profile: state.profilePage.profile,
     isAuth: state.auth.isAuth,
 });
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
+let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
 
 export default connect(mapStateToProps, {
     getUserProfile

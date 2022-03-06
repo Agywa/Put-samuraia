@@ -4,6 +4,7 @@ import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {AppStateType} from "../../redux/redux-store";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 let mapStateToProps = (state:AppStateType ) => {
   return{
@@ -24,34 +25,10 @@ let mapDispatchToProps = (dispatch:Dispatch) => {
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+let AuthRedirectComponent= withAuthRedirect(Dialogs)
 
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
-
-
-
-// type DialogsContainerType = {
-//     state: DialogPageType
-//     dispatch: (action: { type: string; }) => void
-// }
-
-// const DialogsContainer = (props: DialogsContainerType) => {
-//
-//     let onSendMessageClick = () => {
-//         props.dispatch(sendMessageCreator())
-//     }
-//     let onNewMessageChange = (body: string) => {
-//         props.dispatch(updateNewMessageBodyCreator(body));
-//     }
-//     return (
-//         <Dialogs
-//             dialogsPage={props.state.dialogs}
-//             updateNewMessageBody={onNewMessageChange}
-//             sendMessage={onSendMessageClick}
-//             newMessageBody={props.state.newMessageBody}
-//             messagePage={props.state.messages}
-//         />
-//     )
-// }
 export default DialogsContainer
+
 

@@ -1,9 +1,8 @@
-import React, {ChangeEvent, KeyboardEvent, useEffect} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {DialogPageType, DialogType, MessageType} from "../../redux/store";
-import {useNavigate} from "react-router-dom";
 
 
 type DialogsType = {
@@ -36,15 +35,6 @@ const Dialogs = (props: DialogsType) => {
             onSendMessageClick()
         }
     }
-
-    // if (props.isAuth === false) return {"/login"};
-    let navigate = useNavigate();
-    let LoggedIn = !props.isAuth;
-    useEffect(() => {
-        if (LoggedIn) {
-            return navigate("/login");
-        }
-    }, [LoggedIn]);
 
     return (
         <div className={s.dialogs}>

@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getUserProfile} from "../../redux/profile_reducer";
 import {AppStateType} from "../../redux/redux-store";
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 type ContactsType = {
@@ -36,23 +37,14 @@ export type ProfileType = {
 
 type MapStatePropsType = {
     profile: AppStateType
-    isAuth:boolean
+    isAuth: boolean
 }
 type MapDispatchToPropsType = {
     setUserProfile: (profile: ProfileAllType) => void
 }
 type PropsType = MapStatePropsType & MapDispatchToPropsType
 
-
 const withRouter = (WrappedComponent: any) => (props: any) => {
-    let navigate = useNavigate();
-    let LoggedIn = !props.isAuth;
-    useEffect(() => {
-        if (LoggedIn) {
-            return navigate("/login");
-        }
-    }, [LoggedIn]);
-
     const params = useParams();
     return (
         <WrappedComponent
@@ -62,7 +54,6 @@ const withRouter = (WrappedComponent: any) => (props: any) => {
     );
 };
 
-
 class ProfileContainer extends React.Component<any, any> {
 
     componentDidMount() {
@@ -71,9 +62,7 @@ class ProfileContainer extends React.Component<any, any> {
             userId = 2;
         }
         this.props.getUserProfile(userId);
-
     }
-
 
     render() {
 
@@ -93,31 +82,12 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => ({
     profile: state.profilePage.profile,
     isAuth: state.auth.isAuth,
 });
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
+
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+
+let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
 
 export default connect(mapStateToProps, {
     getUserProfile
-
 })(WithUrlDataContainerComponent);
 
-// let withUrlDataContainerComponent =  withRouter(ProfileContainer);
-//
-// function withRouter(ProfileContainer: any) {
-//     function ComponentWithRouterProp(props: ProfileAllType) {
-//         let location = useLocation();
-//         let navigate = useNavigate();
-//         let params = useParams();
-//         return (
-//             <ProfileContainer
-//                 {...props}
-//                 router={{ location, navigate, params }}
-//             />
-//         );
-//     }
-//
-//     return ComponentWithRouterProp;
-// }
-//
-
-
-// export default connect(mapStateToProps, {setUserProfile}) (ProfileContainer)

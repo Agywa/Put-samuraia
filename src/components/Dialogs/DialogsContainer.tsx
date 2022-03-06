@@ -6,15 +6,15 @@ import {Dispatch} from "redux";
 import {AppStateType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
-let mapStateToProps = (state:AppStateType ) => {
-  return{
-      dialogPage:state.dialogsPage,
-      isAuth: state.auth.isAuth
-  }
-
+let mapStateToProps = (state: AppStateType) => {
+    return {
+        dialogPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
+    }
 }
 
-let mapDispatchToProps = (dispatch:Dispatch) => {
+
+let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         updateNewMessageBody: (body: string) => {
             dispatch(updateNewMessageBodyCreator(body))
@@ -25,7 +25,7 @@ let mapDispatchToProps = (dispatch:Dispatch) => {
     }
 }
 
-let AuthRedirectComponent= withAuthRedirect(Dialogs)
+let AuthRedirectComponent = withAuthRedirect(Dialogs)
 
 const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 

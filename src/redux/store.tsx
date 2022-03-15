@@ -19,7 +19,7 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageBody: string
+
 }
 export type RootStateType = {
     profilePage: ProfilePageType

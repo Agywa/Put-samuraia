@@ -3,6 +3,7 @@ import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {DialogPageType, DialogType, MessageType} from "../../redux/store";
+import {useFormik} from "formik";
 
 
 type DialogsType = {
@@ -21,42 +22,58 @@ const Dialogs = (props: DialogsType) => {
 
     let messagesElements = props.dialogPage.messages.map((m: MessageType) => <Message message={m.message} key={m.id}/>)
 
-    let onSendMessageClick = () => {
-        props.sendMessage()
-    }
-    let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.currentTarget.value
-        props.updateNewMessageBody(body)
-
-    }
-
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === "Enter") {
-            onSendMessageClick()
-        }
-    }
+    // const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    //     if (e.key === "Enter") {
+    //         onSendMessageClick()
+    //     }
+    // }
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
                 {dialogsElements}
             </div>
-            <div>
-                <div className={s.messages}>
-                    <div>{messagesElements}</div>
-                </div>
-                <textarea
-                    value={props.dialogPage.newMessageBody}
-                    onChange={onNewMessageChange}
-                    onKeyPress={onKeyPressHandler}
-                    placeholder="Enter Your message"
-                />
-                <div>
-                    <button onClick={onSendMessageClick}>send</button>
-                </div>
+
+            <div className={s.messages}>
+                <div>{messagesElements}</div>
             </div>
+            <AddMessagesForm
+                sendMessage = {props.sendMessage}/>
         </div>
+
     )
 }
+
+type AddMessagesForm = {
+    sendMessage: (newMessageBody:string) => void
+}
+
+const AddMessagesForm = (props:AddMessagesForm) => {
+    const formik = useFormik({
+        initialValues: {
+            newMessageBody: '',
+        },
+        onSubmit: values => {
+           props.sendMessage(values.newMessageBody)
+        },
+    });
+
+    return (
+        <form onSubmit={formik.handleSubmit}>
+            <div>
+                <textarea
+                    name="newMessageBody"
+                    value={formik.values.newMessageBody}
+                    onChange={formik.handleChange}
+                    placeholder="Enter Your message"
+                />
+            </div>
+            <div>
+                <button>send</button>
+            </div>
+        </form>
+    );
+};
+
 
 export default Dialogs

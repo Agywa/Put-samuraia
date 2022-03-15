@@ -15,7 +15,7 @@ const mapStateToProps = (store: RootStateType) => {
 const mapDispatchToProps = (dispatch: Dispatch) => {
     return {
 
-        addPost: (post:string) => {
+        addPost: (post: string) => {
             dispatch(addPostActionCreator(post))
         }
     }

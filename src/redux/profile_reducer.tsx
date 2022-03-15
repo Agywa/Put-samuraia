@@ -14,7 +14,6 @@ let initialState = {
         {id: 3, message: "Bla Bla", likesCount: 11},
         {id: 4, message: "Dada", likesCount: 11},
     ],
-    newPostText: "",
     profile: null,
     status: "",
 }
@@ -23,10 +22,7 @@ type AddPostActionType = {
     type: "ADD-POST"
     post: string
 }
-export type UpdateNewPostTextType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
-}
+
 export type setUserProfile = {
     type: "SET_USER_PROFILE"
     profile: any
@@ -38,7 +34,6 @@ export type setStatus = {
 
 type ActionTypes =
     AddPostActionType
-    | UpdateNewPostTextType
     | setUserProfile
     | setStatus
 
@@ -51,7 +46,6 @@ export type PostType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
     profile: any
     status: string
 }
@@ -68,16 +62,16 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionTyp
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: "",
+
             }
         }
-
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
         case SET_STATUS: {
             return {...state, status: action.status}
         }
+
         default:
             return state;
     }

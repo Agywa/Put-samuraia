@@ -14,7 +14,6 @@ const MyPosts = (props: MyPostsType) => {
     let postsElements = props.profilePage.posts.map((p: any) =>
         <Post key={p.id} message={p.message}
               likesCount={p.likesCount}/>)
-
     return (
         <div className={s.postsBlock}>
             <h3> My posts </h3>
@@ -31,11 +30,11 @@ const MyPosts = (props: MyPostsType) => {
     )
 }
 
-type PostFormType = {
+type AddNewPostFormType = {
     addPost: (post: string) => void
 }
 
-const AddNewPostForm = (props: PostFormType) => {
+const AddNewPostForm = (props: AddNewPostFormType) => {
     const formik = useFormik({
         initialValues: {
             post: '',

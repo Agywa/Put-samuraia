@@ -41,6 +41,7 @@ const AddNewPostForm = (props: AddNewPostFormType) => {
         },
         onSubmit: values => {
             props.addPost(values.post)
+
         },
     });
 

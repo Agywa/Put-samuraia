@@ -55,6 +55,7 @@ const AddMessagesForm = (props:AddMessagesForm) => {
         },
         onSubmit: values => {
            props.sendMessage(values.newMessageBody)
+
         },
     });
 

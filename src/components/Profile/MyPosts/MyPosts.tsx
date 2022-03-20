@@ -1,12 +1,12 @@
-import React, {ChangeEvent, KeyboardEvent} from 'react';
+import React from 'react';
 import s from "./MyPosts.module.css"
 import Post from "./Posts/Post";
 import {ProfilePageType} from "../../../redux/store";
+import {useFormik} from "formik";
 
 type MyPostsType = {
     profilePage: ProfilePageType
-    updateNewPostText: (text: string) => void
-    addPost: () => void
+    addPost: (post: string) => void
 }
 
 const MyPosts = (props: MyPostsType) => {
@@ -14,39 +14,13 @@ const MyPosts = (props: MyPostsType) => {
     let postsElements = props.profilePage.posts.map((p: any) =>
         <Post key={p.id} message={p.message}
               likesCount={p.likesCount}/>)
-
-    let onAddPosts = () => {
-        props.addPost()
-    }
-
-    let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let text = e.currentTarget.value
-        props.updateNewPostText(text)
-    }
-
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-
-        if (e.key === "Enter") {
-            onAddPosts()
-        }
-    }
-
     return (
         <div className={s.postsBlock}>
             <h3> My posts </h3>
             <div>
-                <div>
-                    <textarea
-                        onChange={onPostChange}
-                        value={props.profilePage.newPostText}
-                        onKeyPress={onKeyPressHandler}
-                        placeholder="Enter your post"
-                    />
-
-                </div>
-                <div>
-                    <button onClick={onAddPosts}>Add post</button>
-                </div>
+                <AddNewPostForm
+                    addPost={props.addPost}
+                />
             </div>
             <div className={s.posts}>
                 {postsElements}
@@ -55,5 +29,36 @@ const MyPosts = (props: MyPostsType) => {
 
     )
 }
+
+type AddNewPostFormType = {
+    addPost: (post: string) => void
+}
+
+const AddNewPostForm = (props: AddNewPostFormType) => {
+    const formik = useFormik({
+        initialValues: {
+            post: '',
+        },
+        onSubmit: values => {
+            props.addPost(values.post)
+        },
+    });
+    return (
+        <form onSubmit={formik.handleSubmit}>
+            <div>
+                <textarea
+                    name="post"
+                    onChange={formik.handleChange}
+                    value={formik.values.post}
+                    placeholder="Enter your post"
+                />
+            </div>
+            <div>
+                <button>Add Post</button>
+            </div>
+        </form>
+    );
+};
+
 
 export default MyPosts

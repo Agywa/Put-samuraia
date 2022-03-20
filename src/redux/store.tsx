@@ -14,12 +14,12 @@ export type PostType = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
+
 }
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageBody: string
+
 }
 export type RootStateType = {
     profilePage: ProfilePageType

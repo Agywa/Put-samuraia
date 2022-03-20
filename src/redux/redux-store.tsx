@@ -8,14 +8,13 @@ import ThunkMiddleware from "redux-thunk";
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
-    dialogsPage:dialogsReducer,
+    dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
 });
 
-export type AppStateType =ReturnType<typeof rootReducer>
-
+export type AppStateType = ReturnType<typeof rootReducer>
 
 
 export let store = createStore(rootReducer, applyMiddleware(ThunkMiddleware));

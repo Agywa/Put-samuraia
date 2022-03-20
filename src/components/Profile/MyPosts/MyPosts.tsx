@@ -41,10 +41,8 @@ const AddNewPostForm = (props: AddNewPostFormType) => {
         },
         onSubmit: values => {
             props.addPost(values.post)
-
         },
     });
-
     return (
         <form onSubmit={formik.handleSubmit}>
             <div>

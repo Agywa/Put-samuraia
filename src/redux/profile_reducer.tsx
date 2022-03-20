@@ -78,10 +78,9 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionTyp
 }
 export default profileReducer;
 
-export const addPostActionCreator = (post:string) => ({type: ADD_POST , post})
+export const addPostActionCreator = (post: string) => ({type: ADD_POST, post})
 const setUserProfile = (profile: ProfileAllType) => ({type: SET_USER_PROFILE, profile})
 export const setStatus = (status: string) => ({type: SET_STATUS, status})
-
 
 export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
     getProfile(userId)
@@ -98,7 +97,7 @@ export const getUserStatus = (userId: number) => (dispatch: Dispatch) => {
 export const updateUserStatus = (status: string) => (dispatch: Dispatch) => {
     updateStatus(status)
         .then(response => {
-            if(response.data.resultCode ===0) {
+            if (response.data.resultCode === 0) {
                 dispatch(setStatus(status))
             }
         })
